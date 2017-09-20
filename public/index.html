@@ -32,6 +32,10 @@
                 platforms.enableBody = true;
                 var ground = platforms.create(0, game.world.height - 64, 'ground');
                 ground.scale.setTo(2,2);
+				
+				//ledge
+				var ledge = platforms.create(300,400, 'ground');
+                ledge.body.immovable = true;
 
 				
 				//Star grav
@@ -60,9 +64,14 @@
 				if (cursors.left.isDown) {
 					player.body.velocity.x = -100;
 				}
+				
 				else if (cursors.right.isDown) {
 					player.body.velocity.x = 100;
 				}
+				if (cursors.up.isDown && player.body.touching.down)
+                {
+                    player.body.velocity.y = -300;
+                }          
 
 
             }
