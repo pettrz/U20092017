@@ -41,7 +41,7 @@
                 ledge.body.immovable = true;
 
 				
-				//Star grav
+				//dude physics
 				player = game.add.sprite(32, game.world.height -150, 'dude');
 				game.physics.arcade.enable(player);
                 player.body.gravity.y = 300;
@@ -83,13 +83,9 @@
 				}
 				if (cursors.up.isDown && player.body.touching.down) //   
                 {
-                    player.body.velocity.y = -300;
-                }     
-				if (player.body.touching.down == false)
-				{
-					player.animations.play('jump');
-				}     
-
+					player.body.velocity.y = -300;
+				
+                }
 
             }
   </script>
