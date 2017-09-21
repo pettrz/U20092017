@@ -1,0 +1,44 @@
+{"frames": {
+
+"0.png":
+{
+	"frame": {"x":0,"y":0,"w":35,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":32},
+	"sourceSize": {"w":35,"h":32}
+},
+"1.png":
+{
+	"frame": {"x":35,"y":0,"w":35,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":32},
+	"sourceSize": {"w":35,"h":32}
+},
+"2.png":
+{
+	"frame": {"x":70,"y":0,"w":35,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":32},
+	"sourceSize": {"w":35,"h":32}
+},
+"3.png":
+{
+	"frame": {"x":105,"y":0,"w":35,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":32},
+	"sourceSize": {"w":35,"h":32}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "dog_npc.png",
+	"format": "RGBA8888",
+	"size": {"w":140,"h":32},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:7ad453948e07eca8033d3e81e38aa7c5:e2621d68c01a4b39d858dd845446eed8:68a9209f86def68ace0e9b2f3e1bb160$"
+}
+}

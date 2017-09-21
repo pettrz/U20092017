@@ -6,6 +6,13 @@
 	<title>Stickman Skating</title>
 
 	<script type="text/javascript" src="js/phaser.min.js"></script>
+	<style type="text/css">
+		body {
+			margin: 0;
+			font-family: Arial, Helvetica, sans-serif;
+
+		}
+	</style>
 </head>
 <body>
   <h1> Stickman Skate xd </h1>
@@ -14,12 +21,16 @@
 	
 	var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update })
 		var player;
+		var dog_npc;
+		var cursors;
+		
 		
 	  function preload() {
 				game.load.image('sky','assets/sky.png');
 				game.load.image('star','assets/star.png');
 				game.load.image('ground','assets/platform.png');
 				game.load.atlasJSONHash('dude', 'assets/skatestickman.png', 'skatestickman.json');
+				game.load.atlasJSONHash('dog', 'assets/dog_npc.png', 'dog_npc.json');
             }
             
             function create() {
@@ -45,11 +56,24 @@
 				player.body.bounce.y = 0.2;
                 player.body.collideWorldBounds = true;
                 ground.body.immovable = true;	
-					
+
+				//dog physics
+				dog_npc = game.add.sprite(305, game.world.height -150, 'dog');
+				game.physics.arcade.enable(dog_npc);
+                dog_npc.body.gravity.y = 300;
+				dog_npc.body.bounce.y = 0.2;
+                dog_npc.body.collideWorldBounds = true;
+                ground.body.immovable = true;
+				dog_npc.factor = 1;	
+
 				//player animations
 				player.animations.add('left', [0,1,2,3,4], 10, true);
 				player.animations.add('right', [6,7,8,9,10], 10, true);
 				player.animations.add('jump', [11], 10, true);
+
+				//dog_npc animations
+				dog_npc.animations.add('left', [0,1], 10, true);
+				dog_npc.animations.add('right', [2,3], 10, true);
 				
 				//controls
 				cursors = game.input.keyboard.createCursorKeys();
@@ -59,9 +83,28 @@
             function update() {
 			
 				game.physics.arcade.collide(player, platforms);
+				game.physics.arcade.collide(platforms, dog_npc);
+				game.physics.arcade.collide(player, dog_npc);
 				
+
 				player.body.velocity.x = 0;
-				
+
+				//dog_npc actions
+				dog_npc.body.velocity.x = dog_npc.factor * 50;
+
+				if (dog_npc.body.x >= 400)
+				{
+					dog_npc.factor = -1;
+					dog_npc.animations.play('left');
+				}
+
+				if (dog_npc.body.x <= 20)
+				{
+					dog_npc.factor = 1;
+					dog_npc.animations.play('right');
+				}
+			
+				//Player actions
 				if (cursors.left.isDown) 
 				{
 					player.body.velocity.x = -130;
