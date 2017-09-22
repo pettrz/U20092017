@@ -24,6 +24,8 @@
 		var dog_npc;
 		var cursors;
 		var stars;
+		var starC;
+
 		
 		
 	  function preload() {
@@ -32,11 +34,12 @@
 				game.load.image('ground','assets/platform.png');
 				game.load.atlasJSONHash('dude', 'assets/skatestickman.png', 'skatestickman.json');
 				game.load.atlasJSONHash('dog', 'assets/dog_npc.png', 'dog_npc.json');
+				game.load.audio('starC',['assets/sounds/starCollectSound.mp3','assets/sounds/starCollectSound.ogg']);
+
             }
             
             function create() {
-				game.add.sprite(0,0, 'sky');
-				game.add.sprite(0,0, 'star');   
+				game.add.sprite(0,0, 'sky');  
 				
 				//Platform                                
 				platforms = game.add.group();
@@ -56,8 +59,12 @@
 				for (var i = 0; i<10; i++)
 				{
 					var star = stars.create(game.world.randomX, 0, 'star')
-					star.body.gravity.y = 8;
+					star.body.gravity.y = 100;
+					star.body.bounce.y = 0.3 + Math.random() * 0.2;
 				}
+
+				//Sound
+				starC = game.sound.add('starC');
 
 				//dude physics
 				player = game.add.sprite(game.world.randomX, game.world.height -120, 'dude');
@@ -100,7 +107,12 @@
 
 				player.body.velocity.x = 0;
 
-				//Star drop 
+				//Star
+				game.physics.arcade.overlap(player, stars, collectStar, null, this);
+				function collectStar (player, star) {
+					star.kill();
+					starC.play();
+				}
 				//dog_npc actions
 				dog_npc.body.velocity.x = dog_npc.factor *50;	
 				if (dog_npc.body.x >= 750)
